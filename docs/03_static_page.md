@@ -24,6 +24,8 @@ src/main/resource/staticの下にある5ファイルを移植すればよい
 
 * https://docs.github.com/ja/pages/getting-started-with-github-pages/creating-a-github-pages-site
 
+GitHub Enterpriseの場合は https://pages.github.ibm.com/(ユーザー名）/(リポジトリ名) でアクセス出来るようです
+
 開発メモを必ず付けるように習慣づけましょう
 
 ## CSSの効果を確認してみよう
