@@ -1,4 +1,4 @@
-package one.tmbrms.readingsns;
+package com.ibmtambara.readingsns;
 
 import java.time.Instant;
 
