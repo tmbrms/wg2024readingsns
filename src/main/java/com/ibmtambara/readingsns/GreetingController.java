@@ -43,7 +43,8 @@ public class GreetingController {
     
     @GetMapping("/")
     public String toppage(Model model){
-        model.addAttribute("articles", getArticles());
+        var data = new DataStore();
+        model.addAttribute("articles", data.getArticles());
 
         return "index";
     }
