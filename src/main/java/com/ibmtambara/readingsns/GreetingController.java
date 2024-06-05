@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -42,8 +43,9 @@ public class GreetingController {
     }
     
     @GetMapping("/")
-    public String toppage(Model model){
-        var data = new DataStore();
+        public String toppage(Model model){
+        var data = new DataStore("tmp/articles.txt");
+        
         model.addAttribute("articles", data.getArticles());
 
         return "index";

@@ -1,35 +1,44 @@
 package com.ibmtambara.readingsns;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
 
 public class DataStore {
-    public DataStore(){
-        
+    String filename;
+    List<String> lines;
+
+    public DataStore(String filename){
+        this.filename = filename;
+        lines = readLines(filename);
+    }
+    
+    public List<Article> getArticles(){
+        return lines.stream().map(line -> parseLine(line)).toList();
     }
 
-    public List<Article> getArticles(){
-        List<Article> ret = new ArrayList<Article>();
+    private List<String> readLines(String filename) {
+            List<String> ret = null;
+        
+            try {
+                ret = Files.lines(Path.of(filename)).toList();
+            } catch (IOException e) {
+                // Do nothing
+            }
 
-        var article = new Article();
+            return ret;
+    }
 
-        article.setUser("tambara", "tambara-icon.png");
-        article.setBook("シャーロック・ホームズの凱旋", "9784120057342");
-        article.setMessage("2章まで読んだ。ホームズが腐れ大学生なんだが？", "2024-02-09T01:48:54.298Z");
-        ret.add(article);
+    private Article parseLine(String line){
+        var col = line.split(",");
 
-        article = new Article();
-        article.setUser("Eri KUWAHARA", "kuwahara-icon.png");
-        article.setBook("AIリスク教本　攻めのディフェンスで危機回避＆ビジネス加速", "9784296204083");
-        article.setMessage("リスクの章の3つ目まで読んだ。17個は多くない！？", "2024-02-07T05:24:32.911Z");
-        ret.add(article);
+        var a = new Article();
+        a.setUser(col[0], col[1]);
+        a.setBook(col[2], col[3]);
+        a.setMessage(col[4], col[5]);
 
-        article = new Article();
-        article.setUser("harimoto","harimoto-icon.png");
-        article.setBook("入門 モダンLinux", "9784814400218");
-        article.setMessage("ワタシ、リナックスチョットデキル", "2024-01-30T10:07:32.929Z");
-        ret.add(article);
+        return a;
 
-        return ret;
     }
 }
